@@ -1,5 +1,8 @@
 package sobes.bank;
 
+import sobes.handler.OperationSumException;
+import sobes.handler.SumNullException;
+
 import sobes.nominal.Nominal;
 import sobes.nominal.NominalDolor;
 import sobes.nominal.NominalRub;
@@ -26,6 +29,9 @@ public class ATM extends Bank {
     @Override
     public Map<Enum, Integer> getBankResult(Integer sum) {
 
+        if (sum == null)
+            throw new SumNullException("Перейдате не пустоне значение");
+
         if (bankOperation.getClass() == Rubol.class)
            operation(sum, NominalRub.values());
 
@@ -37,11 +43,14 @@ public class ATM extends Bank {
 
     @Override
     protected void operation(int sum, Nominal[] nominal) {
+
+        checkingPossibilityOperation(sum, nominal);
+
         for (Nominal value : nominal)
             sum = bankOperation.sumOperation(sum, value, bank);
 
         if (sum != 0)
-            throw new RuntimeException();
+            throw new OperationSumException("не возможно выдать купюры с таким номиналом");
 
         bank =  bankOperation.bankResultOperation(bank);
     }

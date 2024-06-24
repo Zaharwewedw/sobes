@@ -1,6 +1,7 @@
 package sobes.bank;
 
 import sobes.cupure.BankOperation;
+import sobes.handler.BankEmptyException;
 import sobes.nominal.Nominal;
 
 import java.util.HashMap;
@@ -23,4 +24,14 @@ public abstract class Bank {
     abstract public Map<Enum, Integer> getBankResult(Integer sum);
 
     abstract protected void operation(int sum, Nominal[] nominal);
+
+    protected void checkingPossibilityOperation(int sum, Nominal[] nominal) {
+
+        int res = 0;
+        for (Nominal value : nominal)
+            res += bank.get(value) * value.get();
+
+        if (res < sum)
+            throw new BankEmptyException("В банкомате не достаточно денег");
+    }
 }
