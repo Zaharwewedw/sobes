@@ -26,13 +26,11 @@ public class ATM extends Bank {
     @Override
     public Map<Enum, Integer> getBankResult(Integer sum) {
 
-        if (bankOperation.getClass() == Rubol.class) {
+        if (bankOperation.getClass() == Rubol.class)
            operation(sum, NominalRub.values());
-        }
 
-        if (bankOperation.getClass() == Dolor.class) {
+        if (bankOperation.getClass() == Dolor.class)
            operation(sum, NominalDolor.values());
-        }
 
         return bankOperation.ResultOperation();
     }

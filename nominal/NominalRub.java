@@ -1,8 +1,5 @@
 package sobes.nominal;
 
-import lombok.Getter;
-
-@Getter
 public enum NominalRub implements Nominal {
     B5000(5000),
     B1000(1000),
@@ -21,8 +18,4 @@ public enum NominalRub implements Nominal {
         return value;
     }
 
-    @Override
-    public int length() {
-        return NominalRub.values().length;
-    }
 }

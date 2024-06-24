@@ -11,4 +11,5 @@ public interface BankOperation {
     Map<Enum, Integer> ResultOperation();
 
     Map<Enum, Integer> bankResultOperation(Map<Enum, Integer> bank);
+
 }

@@ -2,7 +2,9 @@ package sobes;
 
 import sobes.nominal.NominalDolor;
 import sobes.nominal.NominalRub;
+
 import sobes.bank.ATM;
+
 import sobes.cupure.BankOperation;
 import sobes.cupure.Dolor;
 import sobes.cupure.Rubol;

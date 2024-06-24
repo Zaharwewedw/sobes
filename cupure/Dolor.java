@@ -20,14 +20,11 @@ public class Dolor implements BankOperation {
 
         if (sum >= nominalDolor.get()) {
             Integer res = sum / nominalDolor.get();
-            if (bank.get((NominalDolor)nominalDolor) >= res) {
-                result.put((NominalDolor)nominalDolor, res);
-                sum -= nominalDolor.get() * res;
-            } else {
-                res = bank.get((NominalDolor)nominalDolor);
-                result.put((NominalDolor)nominalDolor, res);
-                sum -= nominalDolor.get() * res;
-            }
+            if (bank.get((NominalDolor) nominalDolor) < res)
+                res = bank.get((NominalDolor) nominalDolor);
+
+            result.put((NominalDolor)nominalDolor, res);
+            sum -= nominalDolor.get() * res;
         }
         return sum;
     }
@@ -40,9 +37,9 @@ public class Dolor implements BankOperation {
     @Override
     public Map<Enum, Integer> bankResultOperation(Map<Enum, Integer> bank) {
         for (int i = 0; i <= bank.size() - 1; i++)
-            bank.put(NominalDolor.values()[i],  bank.get(NominalDolor.values()[i]) - bank.get(NominalDolor.values()[i]));
+            bank.put(NominalDolor.values()[i],
+                    bank.get(NominalDolor.values()[i]) - bank.get(NominalDolor.values()[i]));
+
         return bank;
     }
-
-
 }
