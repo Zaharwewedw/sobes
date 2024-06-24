@@ -20,4 +20,9 @@ public enum NominalRub implements Nominal {
     public int get() {
         return value;
     }
+
+    @Override
+    public int length() {
+        return NominalRub.values().length;
+    }
 }

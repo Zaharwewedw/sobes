@@ -21,4 +21,9 @@ public enum NominalDolor implements Nominal {
     public int get() {
         return value;
     }
+
+    @Override
+    public int length() {
+        return NominalDolor.values().length;
+    }
 }

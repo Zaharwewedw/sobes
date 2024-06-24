@@ -1,7 +1,9 @@
 package sobes.bank;
 
+import sobes.nominal.Nominal;
 import sobes.nominal.NominalDolor;
 import sobes.nominal.NominalRub;
+
 import sobes.cupure.BankOperation;
 import sobes.cupure.Dolor;
 import sobes.cupure.Rubol;
@@ -21,35 +23,28 @@ public class ATM extends Bank {
         super(bankOperation);
     }
 
+    @Override
     public Map<Enum, Integer> getBankResult(Integer sum) {
 
         if (bankOperation.getClass() == Rubol.class) {
-            for (int i = 0; i < NominalRub.values().length; i++ )
-                sum  =  bankOperation.sumOperation(sum, NominalRub.values()[i], bank);
-
-            if (sum != 0)
-                throw new RuntimeException();
-
-            bank =  bankOperation.bankResultOperation(bank);
+           operation(sum, NominalRub.values());
         }
 
         if (bankOperation.getClass() == Dolor.class) {
-
-            for (int i = 0; i < NominalDolor.values().length; i++ )
-                sum  =  bankOperation.sumOperation(sum, NominalDolor.values()[i], bank);
-
-            if (sum != 0)
-                throw new RuntimeException();
-
-            bank =  bankOperation.bankResultOperation(bank);
+           operation(sum, NominalDolor.values());
         }
-
 
         return bankOperation.ResultOperation();
     }
 
     @Override
-    public void setBank(Enum e, Integer sum) {
-        bank.put(e, sum);
+    protected void operation(int sum, Nominal[] nominal) {
+        for (Nominal value : nominal)
+            sum = bankOperation.sumOperation(sum, value, bank);
+
+        if (sum != 0)
+            throw new RuntimeException();
+
+        bank =  bankOperation.bankResultOperation(bank);
     }
 }
